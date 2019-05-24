@@ -19,6 +19,12 @@ function sumValues(data) {
 }
 
 // Append "percentage", "degrees" and "startOffset" into each data entry
+if(typeof Math.sign === 'undefined'){
+  Math.sign = function(x){ 
+    return x > 0 ? 1 : x < 0 ? -1 : x;
+  }
+}
+
 function extendData({
   data,
   lengthAngle: totalAngle,

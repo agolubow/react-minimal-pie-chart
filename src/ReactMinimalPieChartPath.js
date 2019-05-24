@@ -1,7 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import partialCircle from 'svg-partial-circle';
+//import partialCircle from 'svg-partial-circle';
 import { degreesToRadians, extractPercentage, valueBetween } from './utils';
+
+const partialCircle = function(cx, cy, r, start, end){
+  const length = end - start;
+  if (length === 0) return [];
+  const fromX = r * Math.cos(start) + cx;
+  const fromY = r * Math.sin(start) + cy;
+  const toX = r * Math.cos(end) + cx;
+  const toY = r * Math.sin(end) + cy;
+  const large = Math.abs(length) <= Math.PI ? '0' : '1';
+  const sweep = length < 0 ? '0' : '1';
+  return [['M', fromX, fromY], ['A', r, r, 0, large, sweep, toX, toY]];
+};
 
 function makePathCommands(cx, cy, startAngle, lengthAngle, radius) {
   const patchedLengthAngle = valueBetween(lengthAngle, -359.999, 359.999);
