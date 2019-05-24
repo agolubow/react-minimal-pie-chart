@@ -278,7 +278,27 @@ function renderLabels(data, props) {
       color: dataEntry.color,
       style: props.labelStyle
     };
-    return renderLabelItem(props.label, labelProps, dataEntry.value);
+    return {
+      label: props.label,
+      props: labelProps,
+      value: dataEntry.value
+    };
+  });
+
+  for (var i = 0; i < labels.length; i++) {
+    var previousIndex = i == 0 ? labels.length - 1 : i - 1;
+
+    while (Math.abs(Math.abs(labels[previousIndex].props.dy) - Math.abs(labels[i].props.dy)) < 4) {
+      if (labels[previousIndex].props.dy > labels[i].props.dy) {
+        labels[i].props.dy -= 0.15;
+      } else {
+        labels[i].props.dy += 0.15;
+      }
+    }
+  }
+
+  return labels.map(function (label) {
+    return renderLabelItem(label.label, label.props, label.value);
   });
 }
 
