@@ -2,7 +2,9 @@
 .*
 *.db
 *.log
-node_modules
+node_moduleses
+lib
+dist
 
 coverage
 storybook-static
