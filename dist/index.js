@@ -261,7 +261,7 @@
 
   function renderLabels(data, props) {
     var labelPosition = extractPercentage(props.radius, props.labelPosition);
-    return data.map(function (dataEntry, index) {
+    var labels = data.map(function (dataEntry, index) {
       var startAngle = props.startAngle + dataEntry.startOffset;
       var halfAngle = startAngle + dataEntry.degrees / 2;
       var halfAngleRadians = degreesToRadians(halfAngle);
